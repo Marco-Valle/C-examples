@@ -3,6 +3,12 @@
 
 #define side 3
 
+/*
+ * Past examination 18/02/2018 (version C)
+ * today date: 04/04/2021
+ * my signature: 49dbffdad5428e0a32ba850a6e5e0d45a550c70ef110a748058feb78590ca4dd
+*/
+
 FILE* open_file(char[]);
 void import_square(short[2], int[side][side], FILE*);
 int compute_x(short[2], int[side][side]);

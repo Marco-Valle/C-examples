@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+ * Past examination 16/02/2018 (version D)
+ * today date: 06/04/2021
+ * my signature: 49dbffdad5428e0a32ba850a6e5e0d45a550c70ef110a748058feb78590ca4dd
+*/
+
 #define N 3
 #define MAX_COLUMNS 100
 

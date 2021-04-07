@@ -43,6 +43,8 @@ int main() {
     else
         printf("\nImpossible to complete the square magic\n");
 
+    _fcloseall();   // close the file streams
+    
     return 0;
 }
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
  * Past examination 18/02/2016 (version D)
@@ -22,8 +23,8 @@ void registerFind(unsigned, unsigned, unsigned, unsigned, float, float, float);
 int main(int argc, char **argv) {
 
     // MAIN VARIABLES
-    char * mapName;
-    char * findName;
+    char mapName[25];
+    char findName[25];
     const char outName[] = "out.txt";
     unsigned maxPressure;
     unsigned maxWeight;
@@ -31,14 +32,14 @@ int main(int argc, char **argv) {
     int fileErr; // the error number when we open the file (we need this later)
 
     if(argc==5){
-        mapName = argv[1];
-        findName = argv[2];
+        strcpy_s(mapName, sizeof(mapName), argv[1]);
+        strcpy_s(findName, sizeof(findName), argv[2]);
         maxPressure = (unsigned) argv[3];
         maxWeight = (unsigned) argv[4];
     }else{
         // Some default values
-        mapName = "SEA_map.txt";
-        findName = "finds.txt";
+        strcpy_s(mapName, sizeof(mapName), "SEA_map.txt");
+        strcpy_s(findName, sizeof(findName), "finds.txt");
         maxPressure = 120;
         maxWeight = 40;
         printUsage();
@@ -73,9 +74,11 @@ int main(int argc, char **argv) {
         printf("\n%d finds recovered\n", recoverFinds(maxPressure, maxWeight, numberOfFinds));
 
     // Close the files
-    fclose(mapFile);
-    fclose(findsFile);
-    fclose(outFile);
+    _fcloseall();
+
+    // Deallocate memory
+    free(map);
+    free(finds);
 
     return 0;
 }
@@ -145,6 +148,8 @@ unsigned importMatrix(FILE* file, float*** matrix){
     // The last one is not counted
     if (i > 0)
         i++;
+
+    free(tmp);
 
     return i;
 }

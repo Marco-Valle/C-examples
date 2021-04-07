@@ -17,14 +17,11 @@ void print_results(int[MAX_COLUMNS], unsigned short, FILE*);
 
 int main(int argc, char *argv[]) {
 
-    FILE** files;                               // 1: the input file, 2: the output file
+    FILE** files[2];                            // 1: the input file, 2: the output file
     char filename_input[25] = "input.txt";      // the default input file's name
     char filename_output[25] = "output.txt";    // the default output file's name
     int samples_array[MAX_COLUMNS] = {0};       // the array containing the samples
     unsigned short samples_size;                // the number of samples imported
-
-    // Allocate the memory required for the files array
-    files = malloc(sizeof(FILE) * 2);
 
     // If there are 1 or 2 argv (more than the first), get the files' name from there
     if (argc >= 2)
@@ -45,9 +42,7 @@ int main(int argc, char *argv[]) {
     }
 
     print_results(samples_array, samples_size, files[1]);
-
     _fcloseall();   // close all the file streams
-    free(files);    // deallocate the memory for the files' pointer
     
     exit(EXIT_SUCCESS);
 }

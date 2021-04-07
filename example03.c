@@ -46,7 +46,9 @@ int main(int argc, char *argv[]) {
 
     print_results(samples_array, samples_size, files[1]);
 
-    free(files);    // deallocate the memory for the files' pointers
+    _fcloseall();   // close all the file streams
+    free(files);    // deallocate the memory for the files' pointer
+    
     exit(EXIT_SUCCESS);
 }
 

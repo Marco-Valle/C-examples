@@ -1,0 +1,16 @@
+A file has the following format:
+- the first row contains an integer number n
+- the following n rows store a string (each string is terminated
+  by a '\n' character).
+The longest string included in the file is 100 character long but
+the average string length is much smaller (e.g., 10 characters).
+
+A C program receives two file names on the command line (input and
+output file names).
+The first file has the format previously specified.
+The program:
+1) reads the content of the first (input) file and stores all strings
+   into a dynamic data structure
+2) orders the strings in alphabetic order
+3) stores the strings in the second (output) file.
+   The output file has the same format of the input one.

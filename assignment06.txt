@@ -1,0 +1,20 @@
+A matrix of strings is stored in a file with the following format:
+
+R C
+string_1_1 string_1_2 string_1_3 ... string_1_C 
+...
+string_R_1 string_R_2 string_R_3 ... string_R_C 
+
+where R and C are integers, representing the number of rows and
+columns of the matrix, and string_i_j are the strings stored in
+the matrix.
+Each string is at most 20 characters long.
+Notice that strings on each row are already alphabetically ordered.
+
+Write a C program able to "merge" all strings in the matrix in a
+single array of strings, i.e., to store all strings of the matrix
+in a unique array containing all strings alphabetically ordered.
+
+The result has to be stored in an output file, which contains
+the total number of strings on the first row, and all string in the
+following lines.

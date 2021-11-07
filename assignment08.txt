@@ -1,0 +1,60 @@
+A "producer" file includes a line for each car manufacturer with the
+following format:
+manufactuiredName id
+where manufacturerName and id are strings of 20 characters at most.
+The following is an example:
+
+FIAT it001
+ALFA_ROMEO it002
+BMW ge001
+MERCEDES ge002
+TOYOTA ja001
+...
+
+The size of the file, and the order of the lines within the file, are
+unknown.
+
+A "product" file stores the product names and relative prices for each
+product of each manufacturer, with the format:
+id productName price
+The following one is an example:
+
+it001 500 15131
+it001 Panda 12001
+it001 Punto 17891
+ge002 AClass 22411
+ge002 CClass 75641
+...
+
+The size (and order) of the file is unknown.
+
+Write a C program that:
+* receives two file names on the command line
+* stores the content of the two files (the first one of type "producer",
+  the second one of type "product") in a proper data structure
+* goes through an iteration in which it reads the name of a
+  manufacturer (e.g, FIAT) and it prints-out all products (and
+  relative prices) produced by it on standard output.
+
+Suggestion
+----------
+
+Implement a "list of lists", i.e., a main "producer" list with
+a secondary "product" list for each producer element.
+
+ ------	   ------    ------	 	 
+ |    | -> |    | -> |    | -> ... product list
+ ------    ------    ------   
+   |
+   v
+ ------    ------	 
+ |    | -> |    | -> ...
+ ------	   ------   
+   |
+   v
+producer
+ list
+ ...
+
+as with this data structure it is easy to find all products
+manufactured by a given producer.

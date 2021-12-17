@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 /*
  * Past examination 16/02/2018 (version D)
@@ -17,7 +18,7 @@ void print_results(int[MAX_COLUMNS], unsigned short, FILE*);
 
 int main(int argc, char *argv[]) {
 
-    FILE** files[2];                            // 1: the input file, 2: the output file
+    FILE* files[2];                            // 1: the input file, 2: the output file
     char filename_input[25] = "input.txt";      // the default input file's name
     char filename_output[25] = "output.txt";    // the default output file's name
     int samples_array[MAX_COLUMNS] = {0};       // the array containing the samples
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
 
     print_results(samples_array, samples_size, files[1]);
     _fcloseall();   // close all the file streams
-    
+
     exit(EXIT_SUCCESS);
 }
 
@@ -90,8 +91,8 @@ void print_results(int array[MAX_COLUMNS], unsigned short max_index, FILE* out){
     unsigned short i;
     unsigned short max_idx = -1;    // the position of the maximum value in the array
     unsigned short min_idx = -1;    // the position of the minimum value in the array
-    int max = -32767;               // the maximum value, it is initialize with the smallest integer
-    int min = +32767;               // the minimum value, it is initialize with the greatest integer
+    int max = INT_MIN;              // the maximum value, it is initialize with the smallest integer
+    int min = INT_MAX;              // the minimum value, it is initialize with the greatest integer
 
     for(i = 0; i<=max_index; i++){
         if (array[i] < min) {

@@ -8,4 +8,4 @@ The last examples are more clear and clever, beacuse I'm improving my coding ski
 # Notes
 
 Example 01:
-* The output is different from the asignment one. I didn't care about this task.
+* The output is slightly different from the asignment one. I didn't care about this task.

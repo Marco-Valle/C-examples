@@ -12,7 +12,7 @@
 unsigned open_files(FILE**, char[], char[]);
 void update_primes(unsigned);
 unsigned is_truncable_prime(char[10], unsigned, unsigned);
-unsigned import_numbers(FILE*, unsigned*, unsigned, unsigned);
+unsigned import_numbers(FILE*, unsigned**, unsigned, unsigned);
 void get_output(unsigned*, unsigned, unsigned, unsigned, FILE*);
 
 unsigned* primes_array;     // All the integers in the range [0, n] corresponds to 0: prime, 1: not prime
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
     // Import the numbers from the file, compare them with our list of prime numbers
     // and get the numbers of truncated prime numbers in our range
-    number_truncated_prime = import_numbers(files[0], truncated_primes_array, left_limit, right_limit);
+    number_truncated_prime = import_numbers(files[0], &truncated_primes_array, left_limit, right_limit);
 
     // Print the output
     get_output(truncated_primes_array, number_truncated_prime, left_limit, right_limit, files[1]);
@@ -137,10 +137,11 @@ unsigned is_truncable_prime(char n[10], unsigned left, unsigned right){
 
 }
 
-unsigned import_numbers(FILE* input, unsigned* array, unsigned left, unsigned right){
+unsigned import_numbers(FILE* input, unsigned** array, unsigned left, unsigned right){
 
     char n[10];
     unsigned counter = 0;
+    unsigned *ptr = NULL;
 
     while ( fscanf_s(input, "%s ", n, sizeof(n)) ){
 
@@ -150,8 +151,13 @@ unsigned import_numbers(FILE* input, unsigned* array, unsigned left, unsigned ri
 
         if (is_truncable_prime(n, left, right)){
             counter++;                                                          // increment the counter
-            array = realloc(array, counter*sizeof(unsigned));              // allocate the memory required
-            array[counter-1] = (unsigned) strtol(n, NULL, 10);     // add to the array the number
+            ptr = realloc(*array, counter*sizeof(unsigned));              // allocate the memory required
+            if (ptr == NULL){
+                printf("Memory allocation error. Abort.");
+                exit(EXIT_FAILURE);
+            }
+            *array = ptr;
+            ptr[counter-1] = (unsigned) strtol(n, NULL, 10);     // add to the array the number
         }
     }
 

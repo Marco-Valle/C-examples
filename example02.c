@@ -10,16 +10,15 @@
 */
 
 FILE* open_file(char[]);
-void import_square(short[2], int[side][side], FILE*);
-int compute_x(short[2], int[side][side]);
-void print_all(short[2], int[side][side]);
+void import_square(int[2], int[side][side], FILE*);
+int compute_x(const int[2], int[side][side]);
+void print_all(const int[2], int[side][side]);
 
 int main() {
 
     char filename[] = "input.txt";
     FILE* file;
-    int square[side][side];
-    short k[2];
+    int square[side][side], k[2];
     int x;
 
     if(!(file = open_file(filename))){
@@ -43,23 +42,21 @@ int main() {
     else
         printf("\nImpossible to complete the square magic\n");
 
-    _fcloseall();   // close the file streams
-    
-    return 0;
+    exit(EXIT_SUCCESS);
 }
 
 FILE* open_file(char filename[]){
     FILE* file;
-    if (fopen_s(&file, filename, "r") == 0)
+    if (fopen_s(&file, filename, "r") == 0) {
         return file;
-    else
-        return 0;
+    }
+    return 0;
 }
 
-void import_square(short k[2], int square[side][side], FILE* file) {
+void import_square(int k[2], int square[side][side], FILE* file) {
 
-    short tmp_x_sum = 0;            // sum of the row
-    short tmp_y_sums[side] = {0};   // sums of the columns
+    int tmp_x_sum = 0;            // sum of the row
+    int tmp_y_sums[side] = {0};   // sums of the columns
     short i, j;
 
     k[0] = -1;                      // K
@@ -71,7 +68,7 @@ void import_square(short k[2], int square[side][side], FILE* file) {
         j = 0;
         while (j < side) {
             // Read side*side values (ignoring everything that isn't an integer)
-            if (fscanf_s(file, "%d", &square[i][j])) j++;
+            if (fscanf_s(file, "%d%*c", &square[i][j])) j++;
         }
     }
 
@@ -84,12 +81,12 @@ void import_square(short k[2], int square[side][side], FILE* file) {
                 // In the position of -1
                 tmp_x_sum = -1;                             // set the row sum to -1
                 tmp_y_sums[j] = -1;                         // set the column sum to -1
-                k[1] = (short) (i == j ? i : -2);           // save the position
+                k[1] = (i == j ? i : -2);           // save the position
             } else {
                 if (tmp_x_sum != -1)                        // If the row doesn't contain the -1
-                    tmp_x_sum += (short) square[i][j];      // update the row sum
+                    tmp_x_sum += square[i][j];      // update the row sum
                 if (tmp_y_sums[j] != -1)                    // If the column doesn't contain the -1
-                    tmp_y_sums[j] += (short) square[i][j];  // update the column sum
+                    tmp_y_sums[j] += square[i][j];  // update the column sum
             }
         }
 
@@ -101,10 +98,11 @@ void import_square(short k[2], int square[side][side], FILE* file) {
         */
         if (tmp_x_sum >= 0) {
             // If the sum of the row is not negative
-            if (k[0] == -1)
+            if (k[0] == -1) {
                 k[0] = tmp_x_sum;   // if k is not define, do it now
-            else
-                k[0] = (short)(k[0] != tmp_x_sum ? -3 : k[0]);
+            } else {
+                k[0] = (k[0] != tmp_x_sum ? -3 : k[0]);
+            }
         }
         tmp_x_sum = 0;
     }
@@ -123,7 +121,7 @@ void import_square(short k[2], int square[side][side], FILE* file) {
     }
 }
 
-int compute_x(short k[2], int square[side][side]){
+int compute_x(const int k[2], int square[side][side]){
 
     int x;                              // the -1 (the unknown)
     unsigned short j;
@@ -149,11 +147,11 @@ int compute_x(short k[2], int square[side][side]){
         return -1;
 }
 
-void print_all(short k[2], int square[side][side]){
+void print_all(const int k[2], int square[side][side]){
 
     unsigned short i, j;
 
-    printf("\nMagic constant: %hi\n\nSquare:\n", k[0]);
+    printf("\nMagic constant: %d\n\nSquare:\n", k[0]);
     for (i = 0; i<side; i++){
         // For each row
         for (j = 0; j < side; j++){

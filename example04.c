@@ -3,6 +3,8 @@
 #include <string.h>
 #include <limits.h>
 
+#define MAX_LEN 25
+
 /*
  * Past examination 15/09/2017 (version C)
  * today date: 07/04/2021
@@ -21,16 +23,16 @@ int main(int argc, char** argv) {
     unsigned right_limit = UINT_MAX;               // Max integer is the default right limit
     unsigned left_limit = 1;                    // 0 is the lowest unsigned int so it is the default left limit
     unsigned number_truncated_prime;            // The number of the right-truncatable prime
-    char input_filename[25] = "input.txt";      // The default filename for input
-    char output_filename[25] = "output.txt";    // The filename for output
     unsigned *truncated_primes_array, *primes_array;
     FILE* files[2];
+    char input_filename[MAX_LEN] = "input.txt";
+    char output_filename[] = "output.txt";
 
     // Allocate some memory for truncated_primes_array
     truncated_primes_array = malloc(sizeof(unsigned));
 
     if(argc > 1)
-        strcpy_s(input_filename, sizeof(input_filename), argv[1]);
+        strcpy_s(input_filename, _countof(input_filename), argv[1]);
     if(argc > 2)
         left_limit = (unsigned) strtol(argv[2], NULL, 10);
     if(argc > 3)

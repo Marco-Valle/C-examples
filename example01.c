@@ -22,6 +22,7 @@ unsigned recoverFinds(Find*, float**, float, float, unsigned, unsigned);
 void printUsage();
 void my_open(FILE**, char*);
 void *my_malloc(size_t);
+void free_all(Find*, float**, unsigned);
 
 int main(int argc, char **argv) {
 
@@ -65,9 +66,7 @@ int main(int argc, char **argv) {
         printf("\n%u finds recovered\n", recoverFinds(finds, map, maxPressure, maxWeight, numberOfFinds, N));
     }
 
-    // Deallocate memory
-    free(map);
-    free(finds);
+    free_all(finds, map, N);
 
     exit(EXIT_SUCCESS);
 }
@@ -199,4 +198,13 @@ void *my_malloc(size_t size){
         exit(EXIT_FAILURE);
     }
     return ptr;
+}
+
+void free_all(Find *finds, float **map, unsigned N){
+    float **ptr = map;
+    for (int i = 0; i < N; ++i, ptr++) {
+        free(*ptr);
+    }
+    free(map);
+    free(finds);
 }

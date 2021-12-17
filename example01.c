@@ -94,7 +94,7 @@ unsigned importMatrix(FILE* file, float ***matrix){
     ptr = (float **) my_malloc(sizeof(float*) * N);
     *matrix = ptr;
     for (int i = 0; i < N; ++i) {
-        ptr[i] = my_malloc(sizeof(float) * N);
+        ptr[i] = (float *) my_malloc(sizeof(float) * N);
     }
 
     // Import the values

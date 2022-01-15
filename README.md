@@ -3,7 +3,7 @@ Some C exercises
 
 There are some exercise of C coding.
 Feel free to read and download them if you want.
-The last examples are more clear and clever, beacuse I'm improving my coding skills.
+The last examples are often more complex.
 
 # Notes
 

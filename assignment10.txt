@@ -1,0 +1,11 @@
+## Exercise 1
+Given 3 arrays of integers, ordered in ascending order, implement a merge operation.
+This operation must be unique for the 3 arrays (you can't merge the first one with the second one and then with the last one).
+
+## Exercise 2
+Write a function able to insert some registry data (name and surname), in the correct postion in an ordered list.
+The surname is the primary key and both the name and the surname have the maximum length equal to 20 characters.
+
+## Exercise 3
+An array of float represents a bank account flows (> 0 -> deposits, < 0 -> withdraws).
+Implement an algorithm which must be able to find the best sequence of flows such that the difference between the maximum and the minimum of the balance at each step is minimum.

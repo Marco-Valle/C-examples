@@ -1,0 +1,14 @@
+Implement a program able to solve the Verbal Arithmetic game, given 3 string from the command line.
+
+Example:
+
+  SEND  +
+  MORE  =
+----------
+ MONEY
+ 
+ You can make the following hypothesis:
+ * Only addition can be performed.
+ * Each letter is associated to an unique decimal digit.
+ * Strings have a maximum length of 8 characters. 
+ * Strings do not include more than 10 different characters.
